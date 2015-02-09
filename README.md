@@ -20,5 +20,11 @@ If you want to react-templatify modules with other extensions, pass an `-x /
 
     % browserify -t coffeeify -t [ react-templatify --extension .rt ] main.coffee
 
+## Things to note
+
+* You should add react-templatify to your devDependencies
+* You will need to manually require lodash in your project.json (or otherwise)
+* Run deamdify on this as well
+
 [Browserify]: http://browserify.org
 [jstransform]: https://github.com/wix/react-templates

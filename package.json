@@ -1,11 +1,12 @@
 {
   "name": "react-templatify",
   "version": "0.0.1",
-  "description": "browserify v2 plugin for react templates",
+  "description": "browserify v2 plugin for react-templates",
   "main": "index.js",
   "dependencies": {
     "through": "~2.3.4",
-    "react-templates": "^0.1.10"
+    "react-templates": "^0.1.10",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "browserify": "4.x.x",
