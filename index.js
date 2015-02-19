@@ -50,7 +50,7 @@ module.exports = function(file, options) {
 
   function transformer(source) {
     // Stripping types needs to happen before the other transforms
-    return reactTemplates.convertTemplateToReact(source);
+    return reactTemplates.convertTemplateToReact(source, options);
   }
 
   return process(file, isRTFile, transformer);
