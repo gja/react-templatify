@@ -38,6 +38,7 @@ function getExtensionsMatcher(extensions) {
 
 module.exports = function(file, options) {
   options = options || {};
+  options.modules = options.modules || "commonjs";
 
   var isRTFile;
 
