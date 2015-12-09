@@ -1,6 +1,6 @@
 {
   "name": "react-templatify",
-  "version": "0.2.0",
+  "version": "0.3.2",
   "description": "browserify v2 plugin for react-templates",
   "main": "index.js",
   "dependencies": {
