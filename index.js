@@ -3,7 +3,7 @@
 var through         = require('through');
 var reactTemplates  = require("react-templates");
 
-function process(file, isRTFile, transformer) {
+function process(file, isRTFile, transformer, options) {
   var data = '';
   function write(chunk) {
     return data += chunk;
@@ -14,6 +14,11 @@ function process(file, isRTFile, transformer) {
     if (isRTFile) {
       try {
         var transformed = transformer(data);
+
+        if (options.modules == 'none' && typeof options.name !== 'undefined') {
+          transformed += 'module.exports = ' + options.name;
+        }
+
         this.queue(transformed);
       } catch (error) {
         error.name = 'ReactTransformify';
@@ -32,13 +37,21 @@ function process(file, isRTFile, transformer) {
   return through(write, compile);
 }
 
+function getFileName(fullPath) {
+  return fullPath.replace(/^.*[\\\/]/, '').replace(/\.[^/.]+$/, '')
+}
+
 function getExtensionsMatcher(extensions) {
   return new RegExp('\\.(' + extensions.join('|') + ')$');
 }
 
 module.exports = function(file, options) {
   options = options || {};
-  options.modules = options.modules || "commonjs";
+  options.modules = options.modules || 'commonjs';
+
+  if (options.modules == 'none') {
+    options.name = getFileName(file) + 'RT';
+  }
 
   var isRTFile;
 
@@ -54,5 +67,5 @@ module.exports = function(file, options) {
     return reactTemplates.convertTemplateToReact(source, options);
   }
 
-  return process(file, isRTFile, transformer);
+  return process(file, isRTFile, transformer, options);
 };
